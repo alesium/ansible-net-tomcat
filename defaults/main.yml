@@ -1,0 +1,8 @@
+---
+www_tomcat_packages:
+    - "tomcat7"
+www_tomcat_service_name: "pkgsrc/tomcat"
+www_tomcat_setenv_sh_src: "setenv.sh.j2"
+www_tomcat_setenv_sh_dest: "/opt/local/share/tomcat/bin/setenv.sh"
+#www_tomcat_pre_include: "../path/to.yaml"
+#www_tomcat_post_include: "../path/to.yaml"

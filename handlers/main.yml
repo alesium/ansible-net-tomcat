@@ -1,0 +1,7 @@
+---
+- name: enable tomcat
+  service: name="{{ net_tomcat_service_name }}" state="started" enabled="yes"
+
+- name: restart tomcat
+  service: name="{{ www_tomcat_service_name }}" state="restarted"
+

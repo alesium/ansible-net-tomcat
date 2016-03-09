@@ -1,0 +1,30 @@
+---
+- name: install required packages
+  pkgin: name="{{ item }}" state="present"
+  ignore_errors: yes
+  notify: enable tomcat
+  with_items: "{{ www_tomcat_packages }}"
+  tags:
+          - tomcat
+          - install
+
+- name: execute pre tomcat configuration tasks
+  include: "{{ www_tomcat_pre_include }}"
+  when: www_tomcat_pre_include is defined
+  tags:
+         - tomcat
+         - update
+
+- name: copy tomcat configuration
+  template: src="{{ www_tomcat_setenv_sh_src }}" dest="{{ www_tomcat_setenv_sh_dest }}" backup="yes" owner="root" group="root" mode="0644"
+  notify: restart tomcat
+  tags:
+          - tomcat
+          - update
+
+- name: execute post tomcat configuration tasks
+  include: "{{ www_tomcat_post_include }}"
+  when: www_tomcat_post_include is defined
+  tags:
+          - tomcat
+          - update
